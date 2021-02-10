@@ -1,3 +1,7 @@
+# 0.1.0-nullsafety.2
+
+Link to screenshots with an absolute URLs in README.
+
 # 0.1.0-nullsafety.1
 
 Initial version of the package.
