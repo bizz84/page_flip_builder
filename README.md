@@ -12,9 +12,9 @@ You can use this to flip images, cards, or widgets of any size.
 
 ## Preview
 
-![Page Flip screenshots](media/page-flip-transition.png)
+![Page Flip screenshots](https://raw.githubusercontent.com/bizz84/page_flip_builder/main/.github/images/page-flip-transition.png)
 
-![Card Flip screenshots](media/cards-flip-transition.png)
+![Card Flip screenshots](https://raw.githubusercontent.com/bizz84/page_flip_builder/main/.github/images/cards-flip-transition.png)
 
 Also see the **[Flutter Web Live Preview](https://page-flip-demo.web.app/#/)**.
 
