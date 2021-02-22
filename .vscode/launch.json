@@ -6,13 +6,13 @@
     "configurations": [
         {
             "name": "PageFlip mobile",
-            "cwd": "examples/page_flip",
+            "cwd": "example",
             "request": "launch",
             "type": "dart"
         },
         {
             "name": "PageFlip web",
-            "cwd": "examples/page_flip",
+            "cwd": "example",
             "request": "launch",
             "type": "dart",
             "args": [
@@ -22,7 +22,7 @@
         },
         {
             "name": "PageFlip web canvaskit",
-            "cwd": "examples/page_flip",
+            "cwd": "example",
             "request": "launch",
             "type": "dart",
             "args": [
@@ -34,7 +34,8 @@
         },
         {
             "name": "Cards mobile",
-            "cwd": "examples/cards",
+            "cwd": "example",
+            "program": "lib/main_cards.dart",
             "request": "launch",
             "type": "dart"
         }
