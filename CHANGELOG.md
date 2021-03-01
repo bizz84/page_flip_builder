@@ -1,3 +1,7 @@
+# 0.1.0
+
+Release version 0.1.0 with null safety.
+
 # 0.1.0-nullsafety.3
 
 Moved both page flip and cards example into `example` folder.
