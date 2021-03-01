@@ -1,3 +1,7 @@
+# 0.1.1
+
+Updated example and README showing how to prevent flickering on Android.
+
 # 0.1.0
 
 Release version 0.1.0 with null safety.
