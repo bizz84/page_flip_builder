@@ -31,9 +31,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: PageFlipBuilder(
-        frontBuilder: (_) => LightHomePage(),
-        backBuilder: (_) => DarkHomePage(),
+      home: Container(
+        // add a black background to prevent flickering on Android when the page flips
+        color: Colors.black,
+        child: PageFlipBuilder(
+          frontBuilder: (_) => LightHomePage(),
+          backBuilder: (_) => DarkHomePage(),
+        ),
       ),
     );
   }
@@ -51,20 +55,24 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: PageFlipBuilder(
-        key: pageFlipKey,
-        frontBuilder: (_) => LightHomePage(
-          onFlip: () => pageFlipKey.currentState?.flip(),
+      home: Container(
+        // add a black background to prevent flickering on Android when the page flips
+        color: Colors.black,
+        child: PageFlipBuilder(
+          key: pageFlipKey,
+          frontBuilder: (_) => LightHomePage(
+            onFlip: () => pageFlipKey.currentState?.flip(),
+          ),
+          backBuilder: (_) => DarkHomePage(
+            onFlip: () => pageFlipKey.currentState?.flip(),
+          ),
+          // flip the axis to horizontal
+          flipAxis: Axis.horizontal,
+          // customize tilt value
+          maxTilt: 0.003,
+          // customize scale
+          maxScale: 0.2,
         ),
-        backBuilder: (_) => DarkHomePage(
-          onFlip: () => pageFlipKey.currentState?.flip(),
-        ),
-        // flip the axis to horizontal
-        flipAxis: Axis.horizontal,
-        // customize tilt value
-        maxTilt: 0.003,
-        // customize scale
-        maxScale: 0.2,
       ),
     );
   }

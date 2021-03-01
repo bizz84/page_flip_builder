@@ -17,20 +17,19 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: PageFlipBuilder(
-        key: pageFlipKey,
-        frontBuilder: (_) => LightHomePage(
-          onFlip: () => pageFlipKey.currentState?.flip(),
+      home: Container(
+        color: Colors.black,
+        child: PageFlipBuilder(
+          key: pageFlipKey,
+          frontBuilder: (_) => LightHomePage(
+            onFlip: () => pageFlipKey.currentState?.flip(),
+          ),
+          backBuilder: (_) => DarkHomePage(
+            onFlip: () => pageFlipKey.currentState?.flip(),
+          ),
+          maxTilt: 0.003,
+          maxScale: 0.2,
         ),
-        backBuilder: (_) => DarkHomePage(
-          onFlip: () => pageFlipKey.currentState?.flip(),
-        ),
-        maxTilt: 0.003,
-        maxScale: 0.2,
       ),
     );
   }
