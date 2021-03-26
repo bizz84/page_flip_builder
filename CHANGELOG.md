@@ -1,3 +1,7 @@
+# 0.1.2
+
+Update `AnimatedPageFlipBuilder` to extend `AnimatedWidget` for less boilerplate code.
+
 # 0.1.1
 
 Updated example and README showing how to prevent flickering on Android.
