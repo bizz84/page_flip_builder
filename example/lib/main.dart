@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
           ),
           maxTilt: 0.003,
           maxScale: 0.2,
+          onFlipComplete: (isFrontSide) => print('front: $isFrontSide'),
         ),
       ),
     );
