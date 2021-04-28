@@ -1,3 +1,7 @@
+# 0.1.3
+
+Add `onFlipComplete` callback to notify when a flip transition has completed.
+
 # 0.1.2
 
 Update `AnimatedPageFlipBuilder` to extend `AnimatedWidget` for less boilerplate code.
