@@ -12,6 +12,7 @@ class PageFlipBuilder extends StatefulWidget {
     this.flipAxis = Axis.horizontal,
     this.maxTilt = 0.003,
     this.maxScale = 0.2,
+    this.onFlipComplete,
   }) : super(key: key);
   final WidgetBuilder frontBuilder;
   final WidgetBuilder backBuilder;
@@ -20,6 +21,10 @@ class PageFlipBuilder extends StatefulWidget {
   final Axis flipAxis;
   final double maxTilt;
   final double maxScale;
+
+  /// This is called when a flip transition has completed (whether interactive or not).
+  /// If the user cancels the interactive transition, it will be called with the same value as before.
+  final void Function(bool)? onFlipComplete;
 
   @override
   PageFlipBuilderState createState() => PageFlipBuilderState();
@@ -53,7 +58,6 @@ class PageFlipBuilderState extends State<PageFlipBuilder>
   }
 
   void _handleDragUpdate(DragUpdateDetails details, double crossAxisLength) {
-    print(crossAxisLength);
     _controller.value += details.primaryDelta! / crossAxisLength;
   }
 
@@ -128,6 +132,7 @@ class PageFlipBuilderState extends State<PageFlipBuilder>
       // while preserving the widget appearance on screen.
       _controller.value = 0.0;
       setState(() => _showFrontSide = !_showFrontSide);
+      widget.onFlipComplete?.call(_showFrontSide);
     }
   }
 
