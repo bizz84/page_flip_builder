@@ -72,6 +72,8 @@ class MyApp extends StatelessWidget {
           maxTilt: 0.003,
           // customize scale
           maxScale: 0.2,
+          // be notified when the flip has completed
+          onFlipComplete: (isFrontSide) => print('isFrontSide: $isFrontSide'),
         ),
       ),
     );

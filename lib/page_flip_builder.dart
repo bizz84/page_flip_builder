@@ -12,6 +12,7 @@ class PageFlipBuilder extends StatefulWidget {
     this.flipAxis = Axis.horizontal,
     this.maxTilt = 0.003,
     this.maxScale = 0.2,
+    this.onFlipComplete,
   }) : super(key: key);
   final WidgetBuilder frontBuilder;
   final WidgetBuilder backBuilder;
@@ -21,13 +22,20 @@ class PageFlipBuilder extends StatefulWidget {
   final double maxTilt;
   final double maxScale;
 
+  /// This is called when a flip transition has completed (whether interactive or not).
+  /// It is only called when the page actually flips, not if the user cancels the interactive transition.
+  final void Function(bool)? onFlipComplete;
+
   @override
   PageFlipBuilderState createState() => PageFlipBuilderState();
 }
 
 class PageFlipBuilderState extends State<PageFlipBuilder>
     with SingleTickerProviderStateMixin {
+  // which side is currently shown
   bool _showFrontSide = true;
+  // whether the front side was shown before the transition started
+  bool _wasFrontSide = true;
   late final AnimationController _controller;
 
   /// Starts a page flip.
@@ -45,6 +53,7 @@ class PageFlipBuilderState extends State<PageFlipBuilder>
   /// );
   /// ```
   void flip() {
+    _wasFrontSide = _showFrontSide;
     if (_showFrontSide) {
       _controller.forward();
     } else {
@@ -52,8 +61,11 @@ class PageFlipBuilderState extends State<PageFlipBuilder>
     }
   }
 
+  void _handleDragStart(DragStartDetails details) {
+    _wasFrontSide = _showFrontSide;
+  }
+
   void _handleDragUpdate(DragUpdateDetails details, double crossAxisLength) {
-    print(crossAxisLength);
     _controller.value += details.primaryDelta! / crossAxisLength;
   }
 
@@ -128,6 +140,10 @@ class PageFlipBuilderState extends State<PageFlipBuilder>
       // while preserving the widget appearance on screen.
       _controller.value = 0.0;
       setState(() => _showFrontSide = !_showFrontSide);
+      if (_wasFrontSide != _showFrontSide) {
+        _wasFrontSide = _showFrontSide;
+        widget.onFlipComplete?.call(_showFrontSide);
+      }
     }
   }
 
@@ -138,11 +154,17 @@ class PageFlipBuilderState extends State<PageFlipBuilder>
       final crossAxisLength =
           isHorizontal ? constraints.maxWidth : constraints.maxHeight;
       return GestureDetector(
+        onHorizontalDragStart: widget.interactiveFlipEnabled && isHorizontal
+            ? (details) => _handleDragStart(details)
+            : null,
         onHorizontalDragUpdate: widget.interactiveFlipEnabled && isHorizontal
             ? (details) => _handleDragUpdate(details, crossAxisLength)
             : null,
         onHorizontalDragEnd: widget.interactiveFlipEnabled && isHorizontal
             ? (details) => _handleDragEnd(details, crossAxisLength)
+            : null,
+        onVerticalDragStart: widget.interactiveFlipEnabled && !isHorizontal
+            ? (details) => _handleDragStart(details)
             : null,
         onVerticalDragUpdate: widget.interactiveFlipEnabled && !isHorizontal
             ? (details) => _handleDragUpdate(details, crossAxisLength)
