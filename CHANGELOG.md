@@ -1,3 +1,7 @@
+# 0.1.4
+
+Updated project to Dart 3.0 and the latest packages (as of December 2023).
+
 # 0.1.3
 
 Add `onFlipComplete` callback to notify when a flip transition has completed.
