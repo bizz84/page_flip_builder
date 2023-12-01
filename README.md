@@ -2,7 +2,7 @@
 # Page Flip Builder
 
 [![Pub](https://img.shields.io/pub/v/page_flip_builder.svg)](https://pub.dev/packages/page_flip_builder)
-[![Language](https://img.shields.io/badge/dart-2.12.0-informational.svg)](https://dart.dev/)
+[![Language](https://img.shields.io/badge/dart-3.0.0-informational.svg)](https://dart.dev/)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](http://mit-license.org)
 [![Twitter](https://img.shields.io/badge/twitter-@biz84-blue.svg)](http://twitter.com/biz84)
 
