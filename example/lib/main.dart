@@ -5,39 +5,49 @@ import 'package:page_flip_builder/page_flip_builder.dart';
 import 'app_assets.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await AppAssets.precacheAll();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   final pageFlipKey = GlobalKey<PageFlipBuilderState>();
+
+  MyApp({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      home: Container(
-        color: Colors.black,
-        child: PageFlipBuilder(
-          key: pageFlipKey,
-          frontBuilder: (_) => LightHomePage(
-            onFlip: () => pageFlipKey.currentState?.flip(),
-          ),
-          backBuilder: (_) => DarkHomePage(
-            onFlip: () => pageFlipKey.currentState?.flip(),
-          ),
-          maxTilt: 0.003,
-          maxScale: 0.2,
-          onFlipComplete: (isFrontSide) => print('front: $isFrontSide'),
+      home: HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  HomePage({super.key});
+
+  final pageFlipKey = GlobalKey<PageFlipBuilderState>();
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.black,
+      child: PageFlipBuilder(
+        key: pageFlipKey,
+        frontBuilder: (_) => LightHomePage(
+          onFlip: () => pageFlipKey.currentState?.flip(),
         ),
+        backBuilder: (_) => DarkHomePage(
+          onFlip: () => pageFlipKey.currentState?.flip(),
+        ),
+        maxTilt: 0.003,
+        maxScale: 0.2,
+        onFlipComplete: (isFrontSide) => debugPrint('front: $isFrontSide'),
       ),
     );
   }
 }
 
 class LightHomePage extends StatelessWidget {
-  const LightHomePage({Key? key, this.onFlip}) : super(key: key);
+  const LightHomePage({super.key, this.onFlip});
   final VoidCallback? onFlip;
   @override
   Widget build(BuildContext context) {
@@ -45,9 +55,9 @@ class LightHomePage extends StatelessWidget {
       data: ThemeData(
           brightness: Brightness.light,
           textTheme: TextTheme(
-            headline3: Theme.of(context)
+            displaySmall: Theme.of(context)
                 .textTheme
-                .headline3!
+                .displaySmall!
                 .copyWith(color: Colors.black87, fontWeight: FontWeight.w600),
           )),
       child: Scaffold(
@@ -79,7 +89,7 @@ class LightHomePage extends StatelessWidget {
 }
 
 class DarkHomePage extends StatelessWidget {
-  const DarkHomePage({Key? key, this.onFlip}) : super(key: key);
+  const DarkHomePage({super.key, this.onFlip});
   final VoidCallback? onFlip;
 
   @override
@@ -88,9 +98,9 @@ class DarkHomePage extends StatelessWidget {
       data: ThemeData(
           brightness: Brightness.dark,
           textTheme: TextTheme(
-            headline3: Theme.of(context)
+            displaySmall: Theme.of(context)
                 .textTheme
-                .headline3!
+                .displaySmall!
                 .copyWith(color: Colors.white, fontWeight: FontWeight.w600),
           )),
       child: Scaffold(
@@ -122,14 +132,16 @@ class DarkHomePage extends StatelessWidget {
 }
 
 class OptionsDrawer extends StatelessWidget {
+  const OptionsDrawer({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Drawer();
+    return const Drawer();
   }
 }
 
 class ProfileHeader extends StatelessWidget {
-  const ProfileHeader({Key? key, required this.prompt}) : super(key: key);
+  const ProfileHeader({super.key, required this.prompt});
   final String prompt;
 
   @override
@@ -138,7 +150,7 @@ class ProfileHeader extends StatelessWidget {
       bottom: false,
       child: Row(
         children: [
-          Text(prompt, style: Theme.of(context).textTheme.headline3),
+          Text(prompt, style: Theme.of(context).textTheme.displaySmall),
           const Spacer(),
           SvgPicture.asset(
             AppAssets.profileIcon,
@@ -153,7 +165,7 @@ class ProfileHeader extends StatelessWidget {
 }
 
 class BottomFlipIconButton extends StatelessWidget {
-  const BottomFlipIconButton({Key? key, this.onFlip}) : super(key: key);
+  const BottomFlipIconButton({super.key, this.onFlip});
   final VoidCallback? onFlip;
   @override
   Widget build(BuildContext context) {

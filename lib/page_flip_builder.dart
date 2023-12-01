@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class PageFlipBuilder extends StatefulWidget {
   const PageFlipBuilder({
-    Key? key,
+    super.key,
     required this.frontBuilder,
     required this.backBuilder,
     this.nonInteractiveAnimationDuration = const Duration(milliseconds: 500),
@@ -13,7 +13,7 @@ class PageFlipBuilder extends StatefulWidget {
     this.maxTilt = 0.003,
     this.maxScale = 0.2,
     this.onFlipComplete,
-  }) : super(key: key);
+  });
   final WidgetBuilder frontBuilder;
   final WidgetBuilder backBuilder;
   final Duration nonInteractiveAnimationDuration;
@@ -187,7 +187,7 @@ class PageFlipBuilderState extends State<PageFlipBuilder>
 
 class AnimatedPageFlipBuilder extends AnimatedWidget {
   const AnimatedPageFlipBuilder({
-    Key? key,
+    super.key,
     required Animation<double> animation,
     required this.showFrontSide,
     required this.frontBuilder,
@@ -195,7 +195,7 @@ class AnimatedPageFlipBuilder extends AnimatedWidget {
     this.flipAxis = Axis.horizontal,
     this.maxTilt = 0.003,
     this.maxScale = 0.2,
-  }) : super(key: key, listenable: animation);
+  }) : super(listenable: animation);
   final bool showFrontSide;
   final WidgetBuilder frontBuilder;
   final WidgetBuilder backBuilder;
@@ -242,8 +242,8 @@ class AnimatedPageFlipBuilder extends AnimatedWidget {
     final scale = _scale();
     return Transform(
       transform: matrix * Matrix4.diagonal3Values(scale, scale, 1.0),
-      child: child,
       alignment: Alignment.center,
+      child: child,
     );
   }
 }

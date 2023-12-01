@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:page_flip_builder/page_flip_builder.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,6 +24,8 @@ class MyApp extends StatelessWidget {
 class HomePage extends StatelessWidget {
   final cardFlipKey1 = GlobalKey<PageFlipBuilderState>();
   final cardFlipKey2 = GlobalKey<PageFlipBuilderState>();
+
+  HomePage({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,8 +82,7 @@ class HomePage extends StatelessWidget {
 }
 
 class FlutterCard extends StatelessWidget {
-  const FlutterCard({Key? key, required this.backgroundColor, this.onFlip})
-      : super(key: key);
+  const FlutterCard({super.key, required this.backgroundColor, this.onFlip});
   final Color backgroundColor;
   final VoidCallback? onFlip;
 
