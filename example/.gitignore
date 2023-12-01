@@ -45,4 +45,6 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-public/
+# Firebase
+.firebase
+.firebaserc
