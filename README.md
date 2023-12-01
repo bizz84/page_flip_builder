@@ -90,4 +90,14 @@ class MyApp extends StatelessWidget {
 - Flip widgets of any size
 - Customizable flip duration, tilt, scale
 
+## Testing the example app
+
+Before running the example app, you need to create the `ios`, `android`, `web` folders as needed:
+
+```
+flutter create . --platform ios
+flutter create . --platform android
+flutter create . --platform web
+```
+
 ### [LICENSE: MIT](LICENSE)
